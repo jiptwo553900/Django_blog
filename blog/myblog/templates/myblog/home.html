@@ -19,8 +19,11 @@
                     <img src="media/{{ post.image }}" alt="{{ post.h1 }}" class="card-img-top">
                     <div class="card-body">
                         <h4 class="card-title">{{ post.h1 }}</h4>
-                        <p class="card-text text-truncate">{{ post.description|safe }}</p>
-                        <div class="d-flex justify-content-between align-items-center">
+                        {{ post.description|safe|truncatechars:200 }}<br>
+                        {% for tag in post.tag.all %}
+                            <a href="{% url 'tag' tag.slug %}" class="mr-1 badge badge-info">#{{ tag }}</a>
+                        {% endfor %}
+                        <div class="d-flex justify-content-between align-items-center mt-2">
                             <div class="btn-group">
                                 <a href="{% url 'post_detail' slug=post.url %}" class="btn btn-sm btn-outline-secondary">Подробнее</a>
                             </div>
