@@ -10,7 +10,7 @@ class SigUpForm(forms.Form):
         widget=forms.TextInput(attrs={
             'class': "form-control",
             'id': "inputUsername",
-            'placeholder': "Name",
+            'placeholder': "Username",
         }),
     )
     password = forms.CharField(
@@ -47,3 +47,58 @@ class SigUpForm(forms.Form):
         user.save()
         auth = authenticate(**self.cleaned_data)
         return auth
+
+
+class SignInForm(forms.Form):
+    username = forms.CharField(
+        max_length=100,
+        required=True,
+        widget=forms.TextInput(attrs={
+            'class': "form-control",
+            'id': "inputUsername",
+            'placeholder': "Username",
+        })
+    )
+    password = forms.CharField(
+        required=True,
+        widget=forms.PasswordInput(attrs={
+            'class': "form-control mt-2",
+            'id': "inputPassword",
+            'placeholder': "Password",
+        })
+    )
+
+
+class FeedBackForm(forms.Form):
+    name = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'id': 'name',
+            'placeholder': "Your name"
+        })
+    )
+    email = forms.CharField(
+        max_length=100,
+        widget=forms.EmailInput(attrs={
+            'class': 'form-control',
+            'id': 'email',
+            'placeholder': "Your email"
+        })
+    )
+    subject = forms.CharField(
+        max_length=200,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'id': 'subject',
+            'placeholder': "Subject"
+        })
+    )
+    message = forms.CharField(
+        widget=forms.Textarea(attrs={
+            'class': 'form-control md-textarea',
+            'id': 'message',
+            'rows': 2,
+            'placeholder': "Message"
+        })
+    )
